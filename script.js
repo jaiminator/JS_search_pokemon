@@ -29,6 +29,13 @@ const pokemons = [
     },
 ];
 
+//RECORRE Y MUESTA POR CONSOLA CADA PROPIEDAD DE CADA POKEMON
+/* pokemons.forEach(pokemon => {
+    const {name, type} = pokemon;
+    console.log(name, type);
+}) */
+
+//CREA Y MUESTRA LA LISTA DE POKEMON
 const listaPokemons = document.getElementById("listPokemons");
 
 for (let i = 0; i < pokemons.length; i++) {
@@ -44,13 +51,34 @@ for (let i = 0; i < pokemons.length; i++) {
 }
 
 function filtrar(e) {
-    console.log(e.target.value);
+    console.log(e.target.value); //COMPRUEBA EL VALOR DE LO QUE HAS INTRODUCIDO
+
+    if (busqueda.value !== "") {
+        pokemons.forEach(pokemon => {
+            const {name, type} = pokemon;
+            if (name.toLowerCase().includes(busqueda.value)) {
+                console.log(name);
+                /* pokemon.innerHTML = "<hr/><p><b>Pokemon: </b>" +
+                    name +
+                    "</p><p><b>Type: </b>" +
+                    type +
+                    "</p>";
+                listaPokemons.appendChild(pokemon); */
+            } else {
+                /* pokemon.innerHTML = "";
+                listaPokemons.appendChild(pokemon); */
+            }
+        });
+    } else {
+        pokemons.forEach(pokemon => {
+            const {name, type} = pokemon;
+            console.log(name);
+        })
+    }
+    /* 
 
     listaPokemons = pokemons.filter((poke) => {
-        
-    });
-
-    /* if (busqueda.value) {
+        if (busqueda.value) {
         for (let i = 0; i < pokemons.length; i++) {
             const { name, type } = pokemons[i];
             if (name.toLowerCase().includes(busqueda.value)) {
@@ -64,8 +92,10 @@ function filtrar(e) {
                 pokemons[i].innerHTML = "";
             }
         }
-    } else {
-    } */
+    }
+    }); */
+
+    
 }
 
 const busqueda = document.getElementById("search");
