@@ -29,74 +29,45 @@ const pokemons = [
     },
 ];
 
-//RECORRE Y MUESTA POR CONSOLA CADA PROPIEDAD DE CADA POKEMON
-/* pokemons.forEach(pokemon => {
-    const {name, type} = pokemon;
-    console.log(name, type);
-}) */
+//ENCONTRAR LA LISTA DE POKEMON
+const listaPokemons = document.getElementById("listaPokemon");
 
-//CREA Y MUESTRA LA LISTA DE POKEMON
-const listaPokemons = document.getElementById("listPokemons");
-
-for (let i = 0; i < pokemons.length; i++) {
-    let pokemon = document.createElement("div");
-    const { name, type } = pokemons[i];
-    pokemon.innerHTML =
-        "<hr/><p><b>Pokemon: </b>" +
-        name +
-        "</p><p><b>Type: </b>" +
-        type +
+//MOSTRAR TODA LA LISTA DE POKEMON AL INICIAL LA PÁGINA
+pokemons.forEach((pokemon) => {
+    const itemPokemon = document.createElement("li");
+    itemPokemon.innerHTML =
+        "<hr/><p><b>Pokemon:</b> " +
+        pokemon.name +
+        "</p><p><b>Type:</b> " +
+        pokemon.type +
         "</p>";
-    listaPokemons.appendChild(pokemon);
+    listaPokemons.appendChild(itemPokemon);
+});
+
+//FILTRAR CADA POKEMON SEGÚN LO INTRODUCIDO EN EL CUADRO DE BÚSQUEDA
+const filtrarPokemon = () => {
+    const busquedaPokemon = inputBusqueda.value.toLowerCase();
+    const pokemonFiltrados = pokemons.filter((pokemon) => {
+        return pokemon.name.toLowerCase().includes(busquedaPokemon);
+    });
+    listaPokemons.innerHTML = "";
+    mostrarPokemons(pokemonFiltrados);
 }
 
-function filtrar(e) {
-    console.log(e.target.value); //COMPRUEBA EL VALOR DE LO QUE HAS INTRODUCIDO
-
-    if (busqueda.value !== "") {
-        pokemons.forEach(pokemon => {
-            const {name, type} = pokemon;
-            if (name.toLowerCase().includes(busqueda.value)) {
-                console.log(name);
-                /* pokemon.innerHTML = "<hr/><p><b>Pokemon: </b>" +
-                    name +
-                    "</p><p><b>Type: </b>" +
-                    type +
-                    "</p>";
-                listaPokemons.appendChild(pokemon); */
-            } else {
-                /* pokemon.innerHTML = "";
-                listaPokemons.appendChild(pokemon); */
-            }
-        });
-    } else {
-        pokemons.forEach(pokemon => {
-            const {name, type} = pokemon;
-            console.log(name);
-        })
-    }
-    /* 
-
-    listaPokemons = pokemons.filter((poke) => {
-        if (busqueda.value) {
-        for (let i = 0; i < pokemons.length; i++) {
-            const { name, type } = pokemons[i];
-            if (name.toLowerCase().includes(busqueda.value)) {
-                pokemons[i].innerHTML =
-                    "<hr/><p><b>Pokemon: </b>" +
-                    name +
-                    "</p><p><b>Type: </b>" +
-                    type +
-                    "</p>";
-            } else {
-                pokemons[i].innerHTML = "";
-            }
-        }
-    }
-    }); */
-
-    
+//MOSTRAR LOS POKEMON FILTRADOS
+const mostrarPokemons = (listaObjetosPokemon) => {
+    listaObjetosPokemon.forEach((pokemon) => {
+        const itemPokemon = document.createElement("li");
+        itemPokemon.innerHTML =
+            "<hr/><p><b>Pokemon:</b> " +
+            pokemon.name +
+            "</p><p><b>Type:</b> " +
+            pokemon.type +
+            "</p>";
+        listaPokemons.appendChild(itemPokemon);
+    });
 }
 
-const busqueda = document.getElementById("search");
-busqueda.addEventListener("keyup", filtrar);
+//ENCONTRAMOS Y AÑADIMOS EVENTO 'KEYUP' AL INPUT DE BÚSQUEDA
+const inputBusqueda = document.getElementById("searchPokemon");
+inputBusqueda.addEventListener("keyup", filtrarPokemon);
