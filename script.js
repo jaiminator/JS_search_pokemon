@@ -70,4 +70,4 @@ const mostrarPokemons = (listaObjetosPokemon) => {
 
 //ENCONTRAMOS Y AÑADIMOS EVENTO 'KEYUP' AL INPUT DE BÚSQUEDA
 const inputBusqueda = document.getElementById("searchPokemon");
-inputBusqueda.addEventListener("keyup", filtrarPokemon);
+inputBusqueda.addEventListener("input", filtrarPokemon);
